@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HOU JIHAO</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -20,9 +20,9 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: #000000;
-            color: #ffffff;
+            font-family: 'Noto Sans SC', 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #f3f5f6;
+            color: #1d2730;
         }
 
         /* Navigation */
@@ -36,12 +36,13 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(255, 255, 255, 0.88);
             backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid #dce2e5;
         }
 
         .nav-logo {
+            font-family: 'Manrope', 'Noto Sans SC', sans-serif;
             font-size: 18px;
             font-weight: 700;
             background: linear-gradient(135deg, #007AFF, #5856D6);
@@ -56,7 +57,7 @@
         }
 
         .nav-links a {
-            color: #86868b;
+            color: #66747e;
             text-decoration: none;
             font-size: 14px;
             font-weight: 500;
@@ -66,6 +67,31 @@
         .nav-links a:hover,
         .nav-links a.active {
             color: #007AFF;
+        }
+
+        .language-switcher {
+            display: flex;
+            margin-left: 24px;
+            overflow: hidden;
+            border: 1px solid #dce2e5;
+            border-radius: 4px;
+            background: #ffffff;
+        }
+
+        .language-switcher button {
+            width: 34px;
+            height: 28px;
+            padding: 0;
+            border: 0;
+            color: #66747e;
+            background: transparent;
+            font: 600 11px 'Manrope', sans-serif;
+            cursor: pointer;
+        }
+
+        .language-switcher button.active {
+            color: #ffffff;
+            background: #1d2730;
         }
 
         /* Main Container */
@@ -106,8 +132,8 @@
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            background: rgba(0, 122, 255, 0.2);
-            border: 1px solid rgba(0, 122, 255, 0.4);
+            background: #ffffff;
+            border: 1px solid #d6dde1;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -117,7 +143,7 @@
         }
 
         .scroll-arrow:hover {
-            background: rgba(0, 122, 255, 0.4);
+            background: rgba(0, 122, 255, 0.10);
             transform: translateX(-50%) scale(1.1);
         }
 
@@ -163,7 +189,7 @@
             width: 10px;
             height: 10px;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
+            background: #c4cdd2;
             cursor: pointer;
             transition: all 0.3s ease;
             border: none;
@@ -171,7 +197,7 @@
 
         .scroll-dot.active {
             background: #007AFF;
-            box-shadow: 0 0 10px rgba(0, 122, 255, 0.5);
+            box-shadow: 0 0 0 4px rgba(0, 122, 255, 0.14);
         }
 
         /* Hero */
@@ -180,8 +206,8 @@
             height: 120px;
             border-radius: 50%;
             object-fit: cover;
-            border: 3px solid rgba(0, 122, 255, 0.5);
-            box-shadow: 0 0 30px rgba(0, 122, 255, 0.3);
+            border: 3px solid #ffffff;
+            box-shadow: 0 10px 30px rgba(29, 39, 48, 0.16);
             margin-bottom: 30px;
             opacity: 0;
             transform: scale(0.8);
@@ -216,7 +242,7 @@
 
         .hero-subtitle {
             font-size: clamp(18px, 3vw, 28px);
-            color: #86868b;
+            color: #66747e;
             opacity: 0;
             transform: translateY(30px);
         }
@@ -245,7 +271,7 @@
 
         .section-subtitle {
             font-size: 18px;
-            color: #86868b;
+            color: #66747e;
             opacity: 0;
             transform: translateY(20px);
         }
@@ -270,16 +296,26 @@
 
         /* About */
         .about-content {
-            max-width: 700px;
+            max-width: 820px;
         }
 
         .about-text {
-            font-size: 18px;
-            color: #86868b;
-            line-height: 1.8;
+            padding-left: 0;
+            border-left: 0;
+            font-size: 19px;
+            color: #51616d;
+            line-height: 1.85;
             text-align: center;
             opacity: 0;
             transform: translateY(30px);
+        }
+
+        .about-text p {
+            margin: 0;
+        }
+
+        .about-text p + p {
+            margin-top: 18px;
         }
 
         .section.active .about-text {
@@ -288,8 +324,8 @@
 
         /* Projects */
         .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            display: flex;
+            flex-wrap: wrap;
             gap: 24px;
             max-width: 1200px;
             width: 100%;
@@ -297,10 +333,13 @@
         }
 
         .project-card {
-            background: #1A1A1A;
-            border-radius: 16px;
+            flex: 0 0 calc((100% - 48px) / 3);
+            position: relative;
+            overflow: hidden;
+            background: #ffffff;
+            border-radius: 8px;
             padding: 32px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid #dce2e5;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -318,10 +357,74 @@
         .section.active .project-card:nth-child(2) { animation-delay: 0.3s; }
         .section.active .project-card:nth-child(3) { animation-delay: 0.4s; }
         .section.active .project-card:nth-child(4) { animation-delay: 0.5s; }
+        .section.active .project-card:nth-child(5) { animation-delay: 0.6s; }
+        .section.active .project-card:nth-child(6) { animation-delay: 0.7s; }
+        .section.active .project-card:nth-child(7) { animation-delay: 0.8s; }
+        .section.active .project-card:nth-child(8) { animation-delay: 0.9s; }
 
         .project-card:hover {
             transform: translateY(-5px) scale(1);
-            border-color: rgba(0, 122, 255, 0.3);
+            border-color: rgba(0, 122, 255, 0.55);
+            box-shadow: 0 12px 24px rgba(29, 39, 48, 0.08);
+        }
+
+        .project-card.award-card {
+            background: #fffdf8;
+            border-color: #e7e0cf;
+        }
+
+        .project-card.award-card:hover {
+            border-color: #d8c58e;
+        }
+
+        .award-label {
+            margin: 0 0 10px;
+            color: #93742a;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+        }
+
+        .project-label {
+            margin: 0 0 10px;
+            color: #007AFF;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+        }
+
+        .card-meta {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-meta .award-label,
+        .card-meta .project-label {
+            margin: 0;
+        }
+
+        .entry-date {
+            position: absolute;
+            top: 15px;
+            right: 17px;
+            z-index: 0;
+            color: #edf1f3;
+            font-family: 'DM Mono', monospace;
+            font-size: 46px;
+            font-weight: 500;
+            letter-spacing: 0;
+            line-height: 1;
+        }
+
+        .project-card h3,
+        .project-card .project-desc,
+        .project-card .project-tags {
+            position: relative;
+            z-index: 1;
         }
 
         .project-title {
@@ -342,7 +445,7 @@
 
         .project-desc {
             font-size: 14px;
-            color: #86868b;
+            color: #66747e;
             margin-bottom: 16px;
         }
 
@@ -355,17 +458,17 @@
 
         .tag {
             padding: 4px 12px;
-            background: rgba(0, 122, 255, 0.1);
-            border: 1px solid rgba(0, 122, 255, 0.2);
+            background: rgba(0, 122, 255, 0.10);
+            border: 1px solid rgba(0, 122, 255, 0.22);
             border-radius: 20px;
             font-size: 12px;
             color: #007AFF;
         }
 
         .award-tag {
-            background: rgba(255, 193, 7, 0.15);
-            border-color: rgba(255, 193, 7, 0.3);
-            color: #FFC107;
+            background: #fff1cd;
+            border-color: #f1d998;
+            color: #876000;
             font-weight: 600;
         }
 
@@ -380,11 +483,11 @@
 
         .skill-tag {
             padding: 12px 24px;
-            background: rgba(0, 122, 255, 0.1);
-            border: 1px solid rgba(0, 122, 255, 0.2);
+            background: #ffffff;
+            border: 1px solid #dce2e5;
             border-radius: 50px;
             font-size: 14px;
-            color: #007AFF;
+            color: #46545e;
             transition: all 0.3s ease;
             opacity: 0;
             transform: translateY(20px) scale(0.9);
@@ -404,9 +507,11 @@
         .section.active .skill-tag:nth-child(8) { animation-delay: 0.45s; }
         .section.active .skill-tag:nth-child(9) { animation-delay: 0.5s; }
         .section.active .skill-tag:nth-child(10) { animation-delay: 0.55s; }
+        .section.active .skill-tag:nth-child(11) { animation-delay: 0.6s; }
+        .section.active .skill-tag:nth-child(12) { animation-delay: 0.65s; }
 
         .skill-tag:hover {
-            background: rgba(0, 122, 255, 0.2);
+            background: rgba(0, 122, 255, 0.12);
             transform: translateY(-2px) scale(1);
         }
 
@@ -428,9 +533,9 @@
             justify-content: center;
             gap: 12px;
             padding: 16px;
-            background: #1A1A1A;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: #ffffff;
+            border-radius: 6px;
+            border: 1px solid #dce2e5;
             transition: all 0.3s ease;
             opacity: 0;
             transform: translateX(-30px);
@@ -452,7 +557,7 @@
         }
 
         .contact-item:hover {
-            border-color: rgba(0, 122, 255, 0.3);
+            border-color: rgba(0, 122, 255, 0.55);
         }
 
         .contact-icon {
@@ -461,7 +566,7 @@
 
         .contact-text {
             font-size: 14px;
-            color: #86868b;
+            color: #66747e;
         }
 
         .contact-text a {
@@ -472,8 +577,11 @@
         @media (max-width: 768px) {
             .navbar { padding: 15px 20px; }
             .nav-links { display: none; }
+            .language-switcher { margin-left: 0; }
             .section { padding: 100px 20px 60px; }
-            .projects-grid { grid-template-columns: 1fr; }
+            .projects-grid { display: flex; }
+            .project-card { flex-basis: 100%; }
+            .about-text { font-size: 17px; }
         }
     </style>
 </head>
@@ -484,10 +592,14 @@
         <ul class="nav-links">
             <li><a href="#" class="active" data-section="0">首页</a></li>
             <li><a href="#" data-section="1">关于我</a></li>
-            <li><a href="#" data-section="2">实践经历</a></li>
-            <li><a href="#" data-section="3">专业技能</a></li>
+            <li><a href="#" data-section="2">项目与荣誉</a></li>
+            <li><a href="#" data-section="3">技术栈与基础</a></li>
             <li><a href="#" data-section="4">联系方式</a></li>
         </ul>
+        <div class="language-switcher" aria-label="Language">
+            <button type="button" data-language="zh">中</button>
+            <button type="button" class="active" data-language="en">EN</button>
+        </div>
     </nav>
 
     <!-- Scroll Dots -->
@@ -505,7 +617,7 @@
         <section class="section active" id="hero">
             <img src="1.png" alt="证件照" class="hero-avatar">
             <h1 class="hero-title">侯吉豪</h1>
-            <p class="hero-subtitle">密码科学与技术 · 海南大学</p>
+            <p class="hero-subtitle">网络安全与密码学部 · 海南大学</p>
             <div class="scroll-arrow scroll-arrow-down" data-section="1">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M12 5v14M19 12l-7 7-7-7"/>
@@ -522,15 +634,12 @@
             </div>
             <div class="section-header">
                 <h2 class="section-title">关于我</h2>
-                <p class="section-subtitle">密码科学与技术专业 · 海南大学</p>
+                <p class="section-subtitle">网络安全与密码学部 · 海南大学</p>
             </div>
             <div class="about-content">
                 <div class="about-text">
-                    <p>我是海南大学密码科学与技术专业的本科生，对密码学和信息安全领域充满热情。</p>
-                    <br>
-                    <p>在校期间，我系统学习了密码学、网络安全、编程等专业知识，具备扎实的理论基础。目前正在深入学习Python、C++等编程语言，希望将密码学理论应用于实际项目中。</p>
-                    <br>
-                    <p>我的目标是成为一名优秀的密码学工程师，为网络安全事业贡献自己的力量。</p>
+                    <p>我是一名就读于海南大学的本科生，热衷于将人工智能想法落地为可用的项目，并在持续的实践中探索技术的真实价值。</p>
+                    <p>未来，我计划攻读密码学与网络安全方向的研究生，在夯实密码与安全基础的同时，探索人工智能在安全领域的应用与研究。</p>
                 </div>
             </div>
             <div class="scroll-arrow scroll-arrow-down" data-section="2">
@@ -548,47 +657,75 @@
                 </svg>
             </div>
             <div class="section-header">
-                <h2 class="section-title">实践经历</h2>
-                <p class="section-subtitle">在校实践与项目经历</p>
+                <h2 class="section-title">项目与荣誉</h2>
+                <p class="section-subtitle">项目、比赛与荣誉奖项</p>
             </div>
             <div class="projects-grid">
-                <div class="project-card">
-                    <h3 class="project-title"><a href="ai-low/index.html" class="project-link">法律AI应用创新与实践项目</a></h3>
-                    <p class="project-desc">第十七届中国大学生服务外包创新创业大赛</p>
+                <div class="project-card award-card">
+                    <span class="entry-date">2026.8</span>
+                    <div class="card-meta"><p class="award-label">荣誉奖项</p></div>
+                    <h3 class="project-title">第十七届中国大学生服务外包创新创业大赛</h3>
+                    <p class="project-desc">人工智能专项赛</p>
                     <div class="project-tags">
-                        <span class="tag award-tag">🏆 国家级三等奖</span>
-                        <span class="tag">AI</span>
-                        <span class="tag">智能体</span>
-                        <span class="tag">法律科技</span>
+                        <span class="tag award-tag">国家级二等奖</span>
                     </div>
                 </div>
                 <div class="project-card">
-                    <h3 class="project-title">密码学课程项目</h3>
-                    <p class="project-desc">完成RSA、AES等经典密码算法的实现，深入理解对称加密和非对称加密原理。</p>
+                    <span class="entry-date">2026.7</span>
+                    <div class="card-meta"><p class="project-label">项目经历</p></div>
+                    <h3 class="project-title">研途智策</h3>
+                    <p class="project-desc">AI驱动的考研学习规划与复试训练桌面平台</p>
                     <div class="project-tags">
-                        <span class="tag">Python</span>
-                        <span class="tag">密码学</span>
-                        <span class="tag">算法</span>
+                        <span class="tag">Electron</span>
+                        <span class="tag">Vue 3</span>
+                        <span class="tag">FastAPI</span>
+                        <span class="tag">SQLite</span>
+                        <span class="tag">科大讯飞星火</span>
+                    </div>
+                </div>
+                <div class="project-card award-card">
+                    <span class="entry-date">2026.7</span>
+                    <div class="card-meta"><p class="award-label">荣誉奖项</p></div>
+                    <h3 class="project-title">第十六届 APMCM 亚太地区大学生数学建模竞赛</h3>
+                    <p class="project-desc">中文赛项</p>
+                    <div class="project-tags">
+                        <span class="tag award-tag">国家级三等奖</span>
                     </div>
                 </div>
                 <div class="project-card">
-                    <h3 class="project-title">编程基础课程</h3>
-                    <p class="project-desc">系统学习C++、Python等编程语言，完成多个课程作业和编程练习。</p>
+                    <span class="entry-date">2026.6</span>
+                    <div class="card-meta"><p class="project-label">项目经历</p></div>
+                    <h3 class="project-title">CarbonChain 碳链可信管理平台</h3>
+                    <p class="project-desc">动力电池全生命周期碳核算与区块链可信溯源平台</p>
                     <div class="project-tags">
-                        <span class="tag">C++</span>
-                        <span class="tag">Python</span>
-                        <span class="tag">数据结构</span>
+                        <span class="tag">Vue 3</span>
+                        <span class="tag">TypeScript</span>
+                        <span class="tag">FastAPI</span>
+                        <span class="tag">PostgreSQL</span>
+                        <span class="tag">Hyperledger Besu</span>
                     </div>
                 </div>
                 <div class="project-card">
-                    <h3 class="project-title">网络安全实践</h3>
-                    <p class="project-desc">参与网络安全相关实验，学习网络攻防技术，了解常见安全漏洞和防护方法。</p>
+                    <span class="entry-date">2026.5</span>
+                    <div class="card-meta"><p class="project-label">项目经历</p></div>
+                    <h3 class="project-title">法律AI应用创新与实践项目</h3>
+                    <p class="project-desc">基于腾讯元器开发平台的劳动合同审查与维权指引智能体</p>
                     <div class="project-tags">
-                        <span class="tag">网络安全</span>
-                        <span class="tag">渗透测试</span>
-                        <span class="tag">安全</span>
+                        <span class="tag">HTML</span>
+                        <span class="tag">CSS</span>
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">微信小程序</span>
+                        <span class="tag">腾讯元器</span>
                     </div>
                 </div>
+                <!--
+                    追加模板：复制一个 project-card，始终粘贴到 projects-grid 的第一张卡片之前，并同时填写中文内容与下方脚本中的英文翻译。
+                    <div class="project-card">
+                        <h3 class="project-title">项目或比赛名称</h3>
+                        <p class="project-desc">项目简介、你的职责或比赛成果。</p>
+                        <div class="project-tags"><span class="tag">技术标签</span></div>
+                    </div>
+                -->
             </div>
             <div class="scroll-arrow scroll-arrow-down" data-section="3">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -605,20 +742,22 @@
                 </svg>
             </div>
             <div class="section-header">
-                <h2 class="section-title">专业技能</h2>
-                <p class="section-subtitle">密码学 · 编程 · 网络安全</p>
+                <h2 class="section-title">技术栈与基础</h2>
+                <p class="section-subtitle">AI 应用开发 · 密码与网络安全</p>
             </div>
             <div class="skills-container">
-                <span class="skill-tag">密码学</span>
                 <span class="skill-tag">Python</span>
-                <span class="skill-tag">C++</span>
-                <span class="skill-tag">网络安全</span>
-                <span class="skill-tag">算法</span>
-                <span class="skill-tag">数据结构</span>
+                <span class="skill-tag">FastAPI</span>
+                <span class="skill-tag">Vue 3</span>
+                <span class="skill-tag">TypeScript</span>
+                <span class="skill-tag">Electron</span>
+                <span class="skill-tag">PostgreSQL</span>
+                <span class="skill-tag">SQLite</span>
                 <span class="skill-tag">Linux</span>
                 <span class="skill-tag">Git</span>
-                <span class="skill-tag">数学基础</span>
-                <span class="skill-tag">信息安全</span>
+                <span class="skill-tag">密码学基础</span>
+                <span class="skill-tag">网络安全基础</span>
+                <span class="skill-tag">数据结构与算法</span>
             </div>
             <div class="scroll-arrow scroll-arrow-down" data-section="4">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -663,6 +802,44 @@
         const navLinks = document.querySelectorAll('.nav-links a');
         const scrollDots = document.querySelectorAll('.scroll-dot');
         let isAnimating = false;
+        let language = localStorage.getItem('portfolio-language') || 'en';
+        const translations = {
+            '首页': 'Home', '关于我': 'About', '项目与荣誉': 'Projects & Honors', '技术栈与基础': 'Tech Stack & Foundations', '联系方式': 'Contact', '侯吉豪': 'HOU JIHAO',
+            '网络安全与密码学部 · 海南大学': 'Faculty of Cybersecurity & Cryptology · Hainan University',
+            '我是一名就读于海南大学的本科生，热衷于将人工智能想法落地为可用的项目，并在持续的实践中探索技术的真实价值。': 'I am an undergraduate student at Hainan University with a strong interest in turning AI ideas into useful projects. Through continuous hands-on work, I explore how technology creates real value.',
+            '未来，我计划攻读密码学与网络安全方向的研究生，在夯实密码与安全基础的同时，探索人工智能在安全领域的应用与研究。': 'Looking ahead, I plan to pursue graduate study in cryptography and cybersecurity, while exploring the application and research of AI in security.',
+            '项目、比赛与荣誉奖项': 'Projects, competitions, and honors',
+            'AI 应用开发 · 密码与网络安全': 'AI Application Development · Cryptography & Cybersecurity', '密码学基础': 'Cryptography Foundations', '网络安全基础': 'Cybersecurity Foundations', '数据结构与算法': 'Data Structures & Algorithms',
+            '法律AI应用创新与实践项目': 'Legal AI Application Innovation & Practice',
+            '基于腾讯元器开发平台的劳动合同审查与维权指引智能体': 'An intelligent agent for labor contract review and rights-protection guidance, built with the Tencent Yuanqi development platform.',
+            '微信小程序': 'WeChat Mini Program', '腾讯元器': 'Tencent Yuanqi',
+            '荣誉奖项': 'HONOR & AWARD', '中国大学生服务外包创新创业大赛': 'China College Students Service Outsourcing Innovation and Entrepreneurship Competition', '第十七届中国大学生服务外包创新创业大赛': '17th China College Students Service Outsourcing Innovation and Entrepreneurship Competition', '国家级二等奖': 'National Second Prize',
+            '第十六届 APMCM 亚太地区大学生数学建模竞赛': '16th Asia and Pacific Mathematical Contest in Modeling (APMCM)', '中文赛项': 'Chinese Division', '国家级三等奖': 'National Third Prize',
+            '人工智能专项赛': 'Artificial Intelligence Special Competition',
+            '项目经历': 'PROJECT EXPERIENCE',
+            '研途智策': 'YanTu AI', 'AI驱动的考研学习规划与复试训练桌面平台': 'An AI-powered desktop platform for postgraduate exam study planning and interview training.', '科大讯飞星火': 'iFlytek Spark',
+            'CarbonChain 碳链可信管理平台': 'CarbonChain Trusted Carbon Management Platform', '动力电池全生命周期碳核算与区块链可信溯源平台': 'A platform for lifecycle carbon accounting and blockchain-based trusted traceability of power batteries.',
+            '密码学 · 编程 · 网络安全': 'Cryptography · Programming · Cybersecurity', '数学基础': 'Mathematical Foundations', '信息安全': 'Information Security',
+            '期待与你的交流': 'Looking forward to connecting with you', '邮箱：': 'Email: ', 'GitHub：': 'GitHub: ', '微信：hjcf7712': 'WeChat: hjcf7712'
+        };
+
+        function translatePage(targetLanguage) {
+            const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+            const nodes = [];
+            while (walker.nextNode()) nodes.push(walker.currentNode);
+            nodes.forEach(node => {
+                const trimmed = node.nodeValue.trim();
+                if (!trimmed) return;
+                const chinese = Object.keys(translations).find(key => key === trimmed || translations[key] === trimmed);
+                if (!chinese) return;
+                const leading = node.nodeValue.match(/^\s*/)[0];
+                const trailing = node.nodeValue.match(/\s*$/)[0];
+                node.nodeValue = leading + (targetLanguage === 'en' ? translations[chinese] : chinese) + trailing;
+            });
+            document.documentElement.lang = targetLanguage === 'en' ? 'en' : 'zh-CN';
+            document.title = targetLanguage === 'en' ? 'HOU JIHAO | Portfolio' : 'HOU JIHAO';
+            document.querySelectorAll('[data-language]').forEach(button => button.classList.toggle('active', button.dataset.language === targetLanguage));
+        }
 
         function goToSection(index) {
             if (isAnimating || index === currentSection || index < 0 || index >= sections.length) return;
@@ -750,6 +927,16 @@
                 else goToSection(currentSection - 1);
             }
         }, { passive: true });
+
+        document.querySelectorAll('[data-language]').forEach(button => {
+            button.addEventListener('click', () => {
+                language = button.dataset.language;
+                localStorage.setItem('portfolio-language', language);
+                translatePage(language);
+            });
+        });
+
+        translatePage(language);
     </script>
 </body>
 </html>
