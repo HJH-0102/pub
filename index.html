@@ -515,6 +515,44 @@
             transform: translateY(-2px) scale(1);
         }
 
+        .certification {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 28px;
+            color: #66747e;
+            font-size: 13px;
+            opacity: 0;
+            transform: translateY(16px);
+        }
+
+        .section.active .certification {
+            animation: fadeInUp 0.5s ease-out 0.78s forwards;
+        }
+
+        .certification-label {
+            color: #007AFF;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+        }
+
+        .certification-name {
+            padding: 7px 11px;
+            border: 1px solid #dce2e5;
+            border-radius: 4px;
+            background: #ffffff;
+            color: #46545e;
+            font-weight: 600;
+        }
+
+        .certification-date {
+            color: #8a969e;
+            font-family: 'DM Mono', monospace;
+            font-size: 12px;
+        }
+
         /* Contact */
         .contact-container {
             max-width: 500px;
@@ -582,6 +620,7 @@
             .projects-grid { display: flex; }
             .project-card { flex-basis: 100%; }
             .about-text { font-size: 17px; }
+            .certification { flex-wrap: wrap; }
         }
     </style>
 </head>
@@ -759,6 +798,11 @@
                 <span class="skill-tag">网络安全基础</span>
                 <span class="skill-tag">数据结构与算法</span>
             </div>
+            <div class="certification">
+                <span class="certification-label">认证</span>
+                <span class="certification-name">阿里云大模型工程师 ACA</span>
+                <span class="certification-date">2026.06</span>
+            </div>
             <div class="scroll-arrow scroll-arrow-down" data-section="4">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M12 5v14M19 12l-7 7-7-7"/>
@@ -810,6 +854,7 @@
             '未来，我计划攻读密码学与网络安全方向的研究生，在夯实密码与安全基础的同时，探索人工智能在安全领域的应用与研究。': 'Looking ahead, I plan to pursue graduate study in cryptography and cybersecurity, while exploring the application and research of AI in security.',
             '项目、比赛与荣誉奖项': 'Projects, competitions, and honors',
             'AI 应用开发 · 密码与网络安全': 'AI Application Development · Cryptography & Cybersecurity', '密码学基础': 'Cryptography Foundations', '网络安全基础': 'Cybersecurity Foundations', '数据结构与算法': 'Data Structures & Algorithms',
+            '认证': 'CERTIFICATION', '阿里云大模型工程师 ACA': 'Alibaba Cloud Certified Associate (ACA) - Large Model Engineer',
             '法律AI应用创新与实践项目': 'Legal AI Application Innovation & Practice',
             '基于腾讯元器开发平台的劳动合同审查与维权指引智能体': 'An intelligent agent for labor contract review and rights-protection guidance, built with the Tencent Yuanqi development platform.',
             '微信小程序': 'WeChat Mini Program', '腾讯元器': 'Tencent Yuanqi',
