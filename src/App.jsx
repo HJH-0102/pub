@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ArrowDown, ArrowUp } from 'lucide-react';
 
 const content = {
@@ -35,20 +35,22 @@ const content = {
 };
 
 const entries = [
-  { kind: 'project', date: '2026.08', title: { zh: '面向真实动态末端揽收的可审计混合伊辛优化', en: 'Auditable Hybrid Ising Optimization for Real-World Dynamic Last-Mile Collection' }, description: { zh: '', en: '' }, tags: { zh: ['QUBO', '伊辛计算', '混合求解', '动态车辆路径'], en: ['QUBO', 'Ising Computing', 'Hybrid Solving', 'Dynamic Vehicle Routing'] } },
-  { kind: 'award', date: '2026.08', title: { zh: '智慧物流', en: 'Smart Logistics' }, description: { zh: '中国光学工程学会首届伊辛·智算未来挑战赛——新质生产力科技成果万里行活动', en: 'The Chinese Society for Optical Engineering’s 1st Ising & Intelligent Computing Future Challenge — Technology Achievement Roadshow for New Quality Productive Forces' }, tags: { zh: ['风采展示成果'], en: ['Featured Showcase Result'] } },
-  { kind: 'award', date: '2026.08', title: { zh: 'A3-基于大模型的个性化资源生成与学习多智能体系统开发', en: 'A3 — Large-Model-Powered Personalized Resource Generation and Multi-Agent Learning System' }, description: { zh: '第十五届“中国软件杯”大学生软件设计大赛', en: '15th “China Software Cup” College Student Software Design Competition' }, tags: { zh: ['国家级二等奖'], en: ['National Second Prize'] } },
+  { kind: 'project', date: '2026.08', title: { zh: '面向动态物流场景的混合伊辛优化与车辆路径求解项目', en: 'Hybrid Ising Optimization and Vehicle Routing for Dynamic Logistics' }, description: { zh: '联合路线选择 QUBO、可行局部下降与前瞻泛化审计', en: 'Combining route-selection QUBO, feasible local descent, and forward-looking generalization auditing.' }, tags: { zh: ['QUBO', '伊辛计算', '混合求解', '动态车辆路径'], en: ['QUBO', 'Ising Computing', 'Hybrid Solving', 'Dynamic Vehicle Routing'] } },
+  { kind: 'award', date: '2026.08', title: { zh: '第十五届“中国软件杯”大学生软件设计大赛', en: '15th “China Software Cup” College Student Software Design Competition' }, description: { zh: 'A3-基于大模型的个性化资源生成与学习多智能体系统开发', en: 'A3 — Large-Model-Powered Personalized Resource Generation and Multi-Agent Learning System' }, tags: { zh: ['国家级二等奖'], en: ['National Second Prize'] } },
+  { kind: 'award', date: '2026.08', title: { zh: '中国光学工程学会首届伊辛·智算未来挑战赛暨新质生产力科技成果万里行活动', en: 'The Chinese Society for Optical Engineering’s 1st Ising & Intelligent Computing Future Challenge and Technology Achievement Roadshow for New Quality Productive Forces' }, description: { zh: '智慧物流', en: 'Smart Logistics' }, tags: { zh: ['风采展示成果'], en: ['Featured Showcase Result'] } },
   { kind: 'award', date: '2026.8', title: { zh: '第十七届中国大学生服务外包创新创业大赛', en: '17th China College Students Service Outsourcing Innovation and Entrepreneurship Competition' }, description: { zh: '人工智能专项赛', en: 'Artificial Intelligence Special Competition' }, tags: { zh: ['国家级二等奖'], en: ['National Second Prize'] } },
-  { kind: 'project', date: '2026.7', title: { zh: '研途智策', en: 'YanTu AI' }, description: { zh: 'AI驱动的考研学习规划与复试训练桌面平台', en: 'An AI-powered desktop platform for postgraduate exam study planning and interview training.' }, tags: { zh: ['Electron', 'Vue 3', 'FastAPI', 'SQLite', '科大讯飞星火'], en: ['Electron', 'Vue 3', 'FastAPI', 'SQLite', 'iFlytek Spark'] } },
+  { kind: 'project', date: '2026.7', title: { zh: '研途智航', en: 'YanTu AI' }, description: { zh: 'AI驱动的考研学习规划与复试训练桌面平台', en: 'An AI-powered desktop platform for postgraduate exam study planning and interview training.' }, tags: { zh: ['Electron', 'Vue 3', 'FastAPI', 'SQLite', 'LLM'], en: ['Electron', 'Vue 3', 'FastAPI', 'SQLite', 'LLM'] } },
   { kind: 'award', date: '2026.7', title: { zh: '第十六届 APMCM 亚太地区大学生数学建模竞赛', en: '16th Asia and Pacific Mathematical Contest in Modeling (APMCM)' }, description: { zh: '中文赛项', en: 'Chinese Division' }, tags: { zh: ['国家级三等奖'], en: ['National Third Prize'] } },
   { kind: 'project', date: '2026.6', title: { zh: 'CarbonChain 碳链可信管理平台', en: 'CarbonChain Trusted Carbon Management Platform' }, description: { zh: '动力电池全生命周期碳核算与区块链可信溯源平台', en: 'A platform for lifecycle carbon accounting and blockchain-based trusted traceability of power batteries.' }, tags: { zh: ['Vue 3', 'TypeScript', 'FastAPI', 'PostgreSQL', 'Hyperledger Besu'], en: ['Vue 3', 'TypeScript', 'FastAPI', 'PostgreSQL', 'Hyperledger Besu'] } },
   { kind: 'project', date: '2026.5', title: { zh: '法律AI应用创新与实践项目', en: 'Legal AI Application Innovation & Practice' }, description: { zh: '基于腾讯元器开发平台的劳动合同审查与维权指引智能体', en: 'An intelligent agent for labor contract review and rights-protection guidance, built with the Tencent Yuanqi development platform.' }, tags: { zh: ['HTML', 'CSS', 'JavaScript', '微信小程序', '腾讯元器'], en: ['HTML', 'CSS', 'JavaScript', 'WeChat Mini Program', 'Tencent Yuanqi'] } },
 ];
 
 const skillTags = {
-  zh: ['Python', 'FastAPI', 'Vue 3', 'TypeScript', 'Electron', 'PostgreSQL', 'SQLite', 'Linux', 'Git', '密码学基础', '网络安全基础', '数据结构与算法'],
-  en: ['Python', 'FastAPI', 'Vue 3', 'TypeScript', 'Electron', 'PostgreSQL', 'SQLite', 'Linux', 'Git', 'Cryptography Foundations', 'Cybersecurity Foundations', 'Data Structures & Algorithms'],
+  zh: ['Python', 'FastAPI', 'Vue 3', 'TypeScript', 'Electron', 'PostgreSQL', 'SQLite', 'Linux', 'Git', 'LangChain'],
+  en: ['Python', 'FastAPI', 'Vue 3', 'TypeScript', 'Electron', 'PostgreSQL', 'SQLite', 'Linux', 'Git', 'LangChain'],
 };
+
+Object.values(skillTags).forEach((skills) => skills.sort((a, b) => a.localeCompare(b, 'en', { numeric: true, sensitivity: 'base' })));
 
 function SectionArrow({ direction, onClick }) {
   const Icon = direction === 'up' ? ArrowUp : ArrowDown;
@@ -58,9 +60,15 @@ function SectionArrow({ direction, onClick }) {
 function App() {
   const [language, setLanguage] = useState(() => localStorage.getItem('portfolio-language') || 'en');
   const [active, setActive] = useState(0);
+  const activeRef = useRef(0);
   const copy = content[language];
 
-  const goTo = (index) => setActive((current) => (index < 0 || index > 4 || index === current ? current : index));
+  const goTo = (index) => setActive((current) => {
+    const next = Math.max(0, Math.min(4, index));
+    if (next === current) return current;
+    activeRef.current = next;
+    return next;
+  });
 
   useEffect(() => {
     document.documentElement.lang = language === 'zh' ? 'zh-CN' : 'en';
@@ -70,22 +78,28 @@ function App() {
 
   useEffect(() => {
     let touchStart = 0;
-    let locked = false;
-    const unlock = () => { locked = false; };
+    let wheelDistance = 0;
+    let wheelLocked = false;
+    let unlockTimer;
     const onWheel = (event) => {
-      if (locked || Math.abs(event.deltaY) < 20) return;
-      locked = true;
-      goTo(active + (event.deltaY > 0 ? 1 : -1));
-      window.setTimeout(unlock, 500);
+      if (wheelLocked) return;
+      wheelDistance += event.deltaY;
+      if (Math.abs(wheelDistance) < 70) return;
+      const direction = wheelDistance > 0 ? 1 : -1;
+      wheelDistance = 0;
+      wheelLocked = true;
+      goTo(activeRef.current + direction);
+      window.clearTimeout(unlockTimer);
+      unlockTimer = window.setTimeout(() => { wheelLocked = false; }, 650);
     };
     const onKeyDown = (event) => {
-      if (['ArrowDown', 'PageDown'].includes(event.key)) { event.preventDefault(); goTo(active + 1); }
-      if (['ArrowUp', 'PageUp'].includes(event.key)) { event.preventDefault(); goTo(active - 1); }
+      if (['ArrowDown', 'PageDown'].includes(event.key)) { event.preventDefault(); goTo(activeRef.current + 1); }
+      if (['ArrowUp', 'PageUp'].includes(event.key)) { event.preventDefault(); goTo(activeRef.current - 1); }
     };
     const onTouchStart = (event) => { touchStart = event.touches[0].clientY; };
     const onTouchEnd = (event) => {
       const distance = touchStart - event.changedTouches[0].clientY;
-      if (Math.abs(distance) > 50) goTo(active + (distance > 0 ? 1 : -1));
+      if (Math.abs(distance) > 50) goTo(activeRef.current + (distance > 0 ? 1 : -1));
     };
     window.addEventListener('wheel', onWheel, { passive: true });
     window.addEventListener('keydown', onKeyDown);
@@ -96,8 +110,9 @@ function App() {
       window.removeEventListener('keydown', onKeyDown);
       window.removeEventListener('touchstart', onTouchStart);
       window.removeEventListener('touchend', onTouchEnd);
+      window.clearTimeout(unlockTimer);
     };
-  }, [active]);
+  }, []);
 
   return (
     <>
@@ -131,7 +146,7 @@ function App() {
           <SectionArrow direction="up" onClick={() => goTo(1)} />
           <div className="section-header"><h2>{copy.portfolio.title}</h2><p>{copy.portfolio.subtitle}</p></div>
           <div className="projects-grid">
-            {entries.map((entry) => <article className={`project-card ${entry.kind === 'award' ? 'award-card' : ''}`} key={`${entry.date}-${entry.title.en}`}>
+            {entries.map((entry, index) => <article className={`project-card ${entry.kind === 'award' ? 'award-card' : ''}`} style={{ '--card-delay': `${80 + index * 80}ms` }} key={`${entry.date}-${entry.title.en}`}>
               <span className="entry-date">{entry.date}</span>
               <div className="card-meta"><span className={entry.kind === 'award' ? 'award-label' : 'project-label'}>{entry.kind === 'award' ? copy.portfolio.award : copy.portfolio.project}</span></div>
               <h3>{entry.title[language]}</h3>{entry.description[language] && <p className="project-desc">{entry.description[language]}</p>}
