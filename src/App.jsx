@@ -35,6 +35,9 @@ const content = {
 };
 
 const entries = [
+  { kind: 'project', date: '2026.08', title: { zh: '面向真实动态末端揽收的可审计混合伊辛优化', en: 'Auditable Hybrid Ising Optimization for Real-World Dynamic Last-Mile Collection' }, description: { zh: '', en: '' }, tags: { zh: ['QUBO', '伊辛计算', '混合求解', '动态车辆路径'], en: ['QUBO', 'Ising Computing', 'Hybrid Solving', 'Dynamic Vehicle Routing'] } },
+  { kind: 'award', date: '2026.08', title: { zh: '智慧物流', en: 'Smart Logistics' }, description: { zh: '中国光学工程学会首届伊辛·智算未来挑战赛——新质生产力科技成果万里行活动', en: 'The Chinese Society for Optical Engineering’s 1st Ising & Intelligent Computing Future Challenge — Technology Achievement Roadshow for New Quality Productive Forces' }, tags: { zh: ['风采展示成果'], en: ['Featured Showcase Result'] } },
+  { kind: 'award', date: '2026.08', title: { zh: 'A3-基于大模型的个性化资源生成与学习多智能体系统开发', en: 'A3 — Large-Model-Powered Personalized Resource Generation and Multi-Agent Learning System' }, description: { zh: '第十五届“中国软件杯”大学生软件设计大赛', en: '15th “China Software Cup” College Student Software Design Competition' }, tags: { zh: ['国家级二等奖'], en: ['National Second Prize'] } },
   { kind: 'award', date: '2026.8', title: { zh: '第十七届中国大学生服务外包创新创业大赛', en: '17th China College Students Service Outsourcing Innovation and Entrepreneurship Competition' }, description: { zh: '人工智能专项赛', en: 'Artificial Intelligence Special Competition' }, tags: { zh: ['国家级二等奖'], en: ['National Second Prize'] } },
   { kind: 'project', date: '2026.7', title: { zh: '研途智策', en: 'YanTu AI' }, description: { zh: 'AI驱动的考研学习规划与复试训练桌面平台', en: 'An AI-powered desktop platform for postgraduate exam study planning and interview training.' }, tags: { zh: ['Electron', 'Vue 3', 'FastAPI', 'SQLite', '科大讯飞星火'], en: ['Electron', 'Vue 3', 'FastAPI', 'SQLite', 'iFlytek Spark'] } },
   { kind: 'award', date: '2026.7', title: { zh: '第十六届 APMCM 亚太地区大学生数学建模竞赛', en: '16th Asia and Pacific Mathematical Contest in Modeling (APMCM)' }, description: { zh: '中文赛项', en: 'Chinese Division' }, tags: { zh: ['国家级三等奖'], en: ['National Third Prize'] } },
@@ -131,7 +134,7 @@ function App() {
             {entries.map((entry) => <article className={`project-card ${entry.kind === 'award' ? 'award-card' : ''}`} key={`${entry.date}-${entry.title.en}`}>
               <span className="entry-date">{entry.date}</span>
               <div className="card-meta"><span className={entry.kind === 'award' ? 'award-label' : 'project-label'}>{entry.kind === 'award' ? copy.portfolio.award : copy.portfolio.project}</span></div>
-              <h3>{entry.title[language]}</h3><p className="project-desc">{entry.description[language]}</p>
+              <h3>{entry.title[language]}</h3>{entry.description[language] && <p className="project-desc">{entry.description[language]}</p>}
               <div className="project-tags">{entry.tags[language].map((tag) => <span className={`tag ${entry.kind === 'award' ? 'award-tag' : ''}`} key={tag}>{tag}</span>)}</div>
             </article>)}
           </div>
