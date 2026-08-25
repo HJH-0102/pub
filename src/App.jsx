@@ -79,18 +79,21 @@ function App() {
   useEffect(() => {
     let touchStart = 0;
     let wheelDistance = 0;
-    let wheelLocked = false;
-    let unlockTimer;
+    let wheelGestureLocked = false;
+    let wheelQuietTimer;
     const onWheel = (event) => {
-      if (wheelLocked) return;
+      window.clearTimeout(wheelQuietTimer);
+      wheelQuietTimer = window.setTimeout(() => {
+        wheelGestureLocked = false;
+        wheelDistance = 0;
+      }, 400);
+      if (wheelGestureLocked) return;
       wheelDistance += event.deltaY;
       if (Math.abs(wheelDistance) < 70) return;
       const direction = wheelDistance > 0 ? 1 : -1;
       wheelDistance = 0;
-      wheelLocked = true;
+      wheelGestureLocked = true;
       goTo(activeRef.current + direction);
-      window.clearTimeout(unlockTimer);
-      unlockTimer = window.setTimeout(() => { wheelLocked = false; }, 650);
     };
     const onKeyDown = (event) => {
       if (['ArrowDown', 'PageDown'].includes(event.key)) { event.preventDefault(); goTo(activeRef.current + 1); }
@@ -110,7 +113,7 @@ function App() {
       window.removeEventListener('keydown', onKeyDown);
       window.removeEventListener('touchstart', onTouchStart);
       window.removeEventListener('touchend', onTouchEnd);
-      window.clearTimeout(unlockTimer);
+      window.clearTimeout(wheelQuietTimer);
     };
   }, []);
 
