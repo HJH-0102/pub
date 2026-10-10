@@ -13,7 +13,7 @@ const content = {
         '未来，我计划攻读密码学与网络安全方向的研究生，在夯实密码与安全基础的同时，探索人工智能在安全领域的应用与研究。',
       ],
     },
-    portfolio: { title: '项目与荣誉', subtitle: '项目、比赛与荣誉奖项', project: '项目经历', award: '荣誉奖项' },
+    portfolio: { title: '项目与荣誉', subtitle: '项目、比赛与荣誉奖项', project: '项目经历', award: '荣誉奖项', all: '全部' },
     skills: { title: '技术栈与基础', subtitle: 'AI 应用开发 · 密码与网络安全', certification: '认证' },
     contact: { title: '联系方式', subtitle: '期待与你的交流', email: '邮箱', wechat: '微信' },
   },
@@ -28,16 +28,18 @@ const content = {
         'Looking ahead, I plan to pursue graduate study in cryptography and cybersecurity, while exploring the application and research of AI in security.',
       ],
     },
-    portfolio: { title: 'Projects & Honors', subtitle: 'Projects, competitions, and honors', project: 'PROJECT EXPERIENCE', award: 'HONOR & AWARD' },
+    portfolio: { title: 'Projects & Honors', subtitle: 'Projects, competitions, and honors', project: 'PROJECT EXPERIENCE', award: 'HONOR & AWARD', all: 'ALL' },
     skills: { title: 'Technology Stack & Foundations', subtitle: 'AI Application Development · Cryptography & Cybersecurity', certification: 'CERTIFICATION' },
     contact: { title: 'Contact', subtitle: 'Open to conversations and collaboration', email: 'EMAIL', wechat: 'WECHAT' },
   },
 };
 
 const entries = [
+  { kind: 'award', date: '2026.10', title: { zh: '“时代杯”全国大学生零碳科技创新大赛', en: '“Shidai Cup” National College Students Zero-Carbon Technology Innovation Competition' }, description: { zh: '智能控碳', en: 'Intelligent Carbon Control' }, tags: { zh: ['中南赛区三等奖'], en: ['Third Prize, Central-South Division'] } },
+  { kind: 'award', date: '2026.10', title: { zh: '第22届百度之星程序设计大赛', en: '22nd Baidu Star Programming Contest' }, description: { zh: '', en: '' }, tags: { zh: ['初赛（省赛）银奖'], en: ['Silver Award, Preliminary Round'] } },
   { kind: 'project', date: '2026.08', title: { zh: '面向动态物流场景的混合伊辛优化与车辆路径求解项目', en: 'Hybrid Ising Optimization and Vehicle Routing for Dynamic Logistics' }, description: { zh: '联合路线选择 QUBO、可行局部下降与前瞻泛化审计', en: 'Combining route-selection QUBO, feasible local descent, and forward-looking generalization auditing.' }, tags: { zh: ['QUBO', '伊辛计算', '混合求解', '动态车辆路径'], en: ['QUBO', 'Ising Computing', 'Hybrid Solving', 'Dynamic Vehicle Routing'] } },
   { kind: 'award', date: '2026.08', title: { zh: '第十五届“中国软件杯”大学生软件设计大赛', en: '15th “China Software Cup” College Student Software Design Competition' }, description: { zh: 'A3-基于大模型的个性化资源生成与学习多智能体系统开发', en: 'A3 — Large-Model-Powered Personalized Resource Generation and Multi-Agent Learning System' }, tags: { zh: ['国家级二等奖'], en: ['National Second Prize'] } },
-  { kind: 'award', date: '2026.08', title: { zh: '中国光学工程学会首届伊辛·智算未来挑战赛暨新质生产力科技成果万里行活动', en: 'The Chinese Society for Optical Engineering’s 1st Ising & Intelligent Computing Future Challenge and Technology Achievement Roadshow for New Quality Productive Forces' }, description: { zh: '智慧物流', en: 'Smart Logistics' }, tags: { zh: ['风采展示成果'], en: ['Featured Showcase Result'] } },
+  { kind: 'award', date: '2026.08', title: { zh: '中国光学工程学会伊辛·智算未来挑战赛暨新质生产力科技成果万里行活动', en: 'The Chinese Society for Optical Engineering’s Ising & Intelligent Computing Future Challenge and Technology Achievement Roadshow for New Quality Productive Forces' }, description: { zh: '智慧物流', en: 'Smart Logistics' }, tags: { zh: ['风采展示成果'], en: ['Featured Showcase Result'] } },
   { kind: 'award', date: '2026.8', title: { zh: '第十七届中国大学生服务外包创新创业大赛', en: '17th China College Students Service Outsourcing Innovation and Entrepreneurship Competition' }, description: { zh: '人工智能专项赛', en: 'Artificial Intelligence Special Competition' }, tags: { zh: ['国家级二等奖'], en: ['National Second Prize'] } },
   { kind: 'project', date: '2026.07', title: { zh: '研途智航', en: 'YanTu AI' }, description: { zh: '基于LLM的考研学习规划与复试训练的多智能体桌面平台', en: 'An LLM-powered multi-agent desktop platform for postgraduate study planning and interview training.' }, tags: { zh: ['Electron', 'Vue 3', 'FastAPI', 'SQLite', 'LLM'], en: ['Electron', 'Vue 3', 'FastAPI', 'SQLite', 'LLM'] } },
   { kind: 'award', date: '2026.7', title: { zh: '第十六届 APMCM 亚太地区大学生数学建模竞赛', en: '16th Asia and Pacific Mathematical Contest in Modeling (APMCM)' }, description: { zh: '中文赛项', en: 'Chinese Division' }, tags: { zh: ['国家级三等奖'], en: ['National Third Prize'] } },
@@ -60,8 +62,15 @@ function SectionArrow({ direction, onClick }) {
 function App() {
   const [language, setLanguage] = useState(() => localStorage.getItem('portfolio-language') || 'en');
   const [active, setActive] = useState(0);
+  const [portfolioFilter, setPortfolioFilter] = useState('all');
+  const [filterRevision, setFilterRevision] = useState(0);
   const activeRef = useRef(0);
   const copy = content[language];
+  const visibleEntries = portfolioFilter === 'all' ? entries : entries.filter((entry) => entry.kind === portfolioFilter);
+  const selectPortfolioFilter = (filter) => {
+    setPortfolioFilter(filter);
+    setFilterRevision((revision) => revision + 1);
+  };
 
   const goTo = (index) => setActive((current) => {
     const next = Math.max(0, Math.min(4, index));
@@ -148,8 +157,13 @@ function App() {
         <section className={`section portfolio-section ${active === 2 ? 'active' : ''}`}>
           <SectionArrow direction="up" onClick={() => goTo(1)} />
           <div className="section-header"><h2>{copy.portfolio.title}</h2><p>{copy.portfolio.subtitle}</p></div>
-          <div className="projects-grid">
-            {entries.map((entry, index) => <article className={`project-card ${entry.kind === 'award' ? 'award-card' : ''}`} style={{ '--card-delay': `${80 + index * 80}ms` }} key={`${entry.date}-${entry.title.en}`}>
+          <div className="portfolio-filters" role="tablist" aria-label={copy.portfolio.title}>
+            <button className={portfolioFilter === 'all' ? 'active' : ''} onClick={() => selectPortfolioFilter('all')}>{copy.portfolio.all} <span>{entries.length}</span></button>
+            <button className={portfolioFilter === 'project' ? 'active' : ''} onClick={() => selectPortfolioFilter('project')}>{copy.portfolio.project} <span>{entries.filter((entry) => entry.kind === 'project').length}</span></button>
+            <button className={portfolioFilter === 'award' ? 'active' : ''} onClick={() => selectPortfolioFilter('award')}>{copy.portfolio.award} <span>{entries.filter((entry) => entry.kind === 'award').length}</span></button>
+          </div>
+          <div key={filterRevision} className={`projects-grid remainder-${visibleEntries.length % 4} ${filterRevision ? 'filtering' : ''}`}>
+            {visibleEntries.map((entry, index) => <article className={`project-card ${entry.kind === 'award' ? 'award-card' : ''}`} style={{ '--card-delay': `${80 + index * 80}ms` }} key={`${portfolioFilter}-${entry.date}-${entry.title.en}`}>
               <span className="entry-date">{entry.date}</span>
               <div className="card-meta"><span className={entry.kind === 'award' ? 'award-label' : 'project-label'}>{entry.kind === 'award' ? copy.portfolio.award : copy.portfolio.project}</span></div>
               <h3>{entry.title[language]}</h3>{entry.description[language] && <p className="project-desc">{entry.description[language]}</p>}
